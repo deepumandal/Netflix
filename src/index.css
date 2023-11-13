@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+#root {
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+}
