@@ -16,7 +16,7 @@ const Login = () => {
   const userPassword = useRef();
   const dispatch = useDispatch();
   const loc = useLocation();
-  console.log("locloc", loc);
+
   const { isAuthenticated, errorMessage } = useSelector((store) => store.auth);
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const Login = () => {
             email,
           })
         );
-        navigate(loc.state?.pathname);
+        navigate(loc.state?.pathname, { replace: true });
       });
     } else {
       CreateNewUserApi({ email, password }).then((response) => {
@@ -68,7 +68,7 @@ const Login = () => {
             email,
           })
         );
-        navigate(loc.state?.pathname);
+        navigate(loc.state?.pathname, { replace: true });
       });
     }
   };
