@@ -1,23 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { getValidatedInputs } from "../utils/getValidatedInputs";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CreateNewUserApi, signInUserApi } from "../api/auth.api";
-import { signInUser, loginUser } from "../reduxStore/authSlice/index";
-
-const backgroundImage =
-  "https://assets.nflxext.com/ffe/siteui/vlv3/77d35039-751f-4c3e-9c8d-1240c1ca6188/cf244808-d722-428f-80a9-052acdf158ec/IN-en-20231106-popsignuptwoweeks-perspective_alpha_website_large.jpg";
+import {
+  UserLoginSignIn,
+  authLoading,
+  authError,
+} from "../reduxStore/authSlice/index";
+import { LOGO, backgroundImage } from "../utils/constants";
 
 const Login = () => {
   const [isAlreadyUser, setIsAlreadyUser] = useState(true);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const userName = useRef();
   const userEmail = useRef();
   const userPassword = useRef();
   const dispatch = useDispatch();
   const loc = useLocation();
 
-  const { isAuthenticated, errorMessage } = useSelector((store) => store.auth);
+  const { errorMessage, loading } = useSelector((store) => store.auth);
   const navigate = useNavigate();
 
   const handleAddNewUser = () => {
@@ -32,44 +34,51 @@ const Login = () => {
 
     // validation check for password and email
     const inputsError = getValidatedInputs(email, password);
-    setError(inputsError);
 
-    if (inputsError) return; // to immidiate stop the if inputs are wrong
-
+    if (inputsError) return dispatch(authError(inputsError)); // to immidiate stop the if inputs are wrong
+    dispatch(authLoading());
     if (isAlreadyUser) {
-      signInUserApi({ email, password }).then((response) => {
-        const { displayName, stsTokenManager, phoneNumber, photoURL, uid } =
-          response.user;
-        const { refreshToken, accessToken, expirationTime } = stsTokenManager;
-        dispatch(
-          loginUser({
-            displayName,
-            userToken: { refreshToken, accessToken, expirationTime },
-            phoneNumber,
-            photoURL,
-            uid,
-            email,
-          })
-        );
-        navigate(loc.state?.pathname, { replace: true });
-      });
+      signInUserApi({ email, password })
+        .then((response) => {
+          const { displayName, stsTokenManager, phoneNumber, photoURL, uid } =
+            response.user;
+          const { refreshToken, accessToken, expirationTime } = stsTokenManager;
+          dispatch(
+            UserLoginSignIn({
+              displayName,
+              userToken: { refreshToken, accessToken, expirationTime },
+              phoneNumber,
+              photoURL,
+              uid,
+              email,
+            })
+          );
+          navigate(loc.state?.pathname, { replace: true });
+        })
+        .catch((error) => {
+          dispatch(authError(error.message));
+        });
     } else {
-      CreateNewUserApi({ email, password }).then((response) => {
-        const { displayName, stsTokenManager, phoneNumber, photoURL, uid } =
-          response.user;
-        const { refreshToken, accessToken, expirationTime } = stsTokenManager;
-        dispatch(
-          signInUser({
-            displayName,
-            userToken: { refreshToken, accessToken, expirationTime },
-            phoneNumber,
-            photoURL,
-            uid,
-            email,
-          })
-        );
-        navigate(loc.state?.pathname, { replace: true });
-      });
+      CreateNewUserApi({ email, password })
+        .then((response) => {
+          const { displayName, stsTokenManager, phoneNumber, photoURL, uid } =
+            response.user;
+          const { refreshToken, accessToken, expirationTime } = stsTokenManager;
+          dispatch(
+            UserLoginSignIn({
+              displayName,
+              userToken: { refreshToken, accessToken, expirationTime },
+              phoneNumber,
+              photoURL,
+              uid,
+              email,
+            })
+          );
+          navigate(loc.state?.pathname, { replace: true });
+        })
+        .catch((error) => {
+          dispatch(authError(error.message));
+        });
     }
   };
 
@@ -81,11 +90,7 @@ const Login = () => {
       </div>
 
       <div>
-        <img
-          className="absolute w-48"
-          src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt="logo"
-        />
+        <img className="absolute w-48" src={LOGO} alt="logo" />
       </div>
       {/* form validiation */}
       <div className="flex w-full h-full justify-center items-center">
@@ -118,11 +123,11 @@ const Login = () => {
               type="submit"
               className="bg-red-600 text-white font-semibold my-3 w-full h-12 rounded-lg"
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
 
             <p className=" text-red-500 font-semibold   cursor-pointer">
-              {error || errorMessage}{" "}
+              {errorMessage}{" "}
             </p>
             <p className=" text-white  my-5 cursor-pointer">
               New to Netflix?{" "}

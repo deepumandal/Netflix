@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter, useNavigate } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import Login from "../views/Authentication";
 import LandingPage from "../views/LandingPage";
 import PrivateRoute from "../HOC/PrivateRoute";
@@ -17,9 +17,9 @@ export const AppRoute = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
+      // <PrivateRoute>
         <AppLayout />
-      </PrivateRoute>
+      // </PrivateRoute>
     ),
     children: [
       {

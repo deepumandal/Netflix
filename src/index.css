@@ -7,3 +7,12 @@
   padding: 0px;
   width: 100vw;
 }
+&::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+}
+
+&::-moz-scrollbar {
+  visibility: hidden;
+}
