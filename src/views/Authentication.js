@@ -83,7 +83,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full" >
       <div>
         <img src={backgroundImage} className="absolute w-full h-full" />
         <div className="absolute w-full h-full bg-gradient-to-b from-[#000000] via-transparent to-[#00000068] bg-opacity-10"></div>

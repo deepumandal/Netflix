@@ -15,13 +15,14 @@ import {
 import TrailerBackround from "../components/custum/TrailerBackround";
 import TrailerCard from "../components/custum/TrailerCard";
 import MovieLists from "../components/custum/movieLists";
+import GptPage from "./GptPage";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
 
   const { trendingMovie, popularMovie, nowPlayingMovie } =
     useSelector((store) => store.trending) || [];
-  console.log(trendingMovie, "trendingMovie");
+  const { isGptPage } = useSelector((store) => store.gpt);
 
   const parseTrendingMovie = (movies) => {
     if (!movies.length) return;
@@ -64,17 +65,22 @@ const LandingPage = () => {
   }, []);
   return (
     <div className="bg-black">
-      <div className="relative">
-        <TrailerBackround />
-        <TrailerCard />
-      </div>
-
-      {/* movie lists */}
-      <div className="bg-gradient-to-b from-[#ffffff00] pl-4 to-black -mt-32 relative z-5">
-        <MovieLists title={"Now Playing"} movies={nowPlayingMovie} />
-        <MovieLists title={"Trending"} movies={trendingMovie} />
-        <MovieLists title={"Popular"} movies={popularMovie} />
-      </div>
+      {isGptPage ? (
+        <GptPage />
+      ) : (
+        <>
+          <div className="relative">
+            <TrailerBackround />
+            <TrailerCard />
+          </div>
+          {/* movie lists */}
+          <div className="bg-gradient-to-b from-[#ffffff00] pl-4 to-black -mt-32 relative z-5">
+            <MovieLists title={"Now Playing"} movies={nowPlayingMovie} />
+            <MovieLists title={"Trending"} movies={trendingMovie} />
+            <MovieLists title={"Popular"} movies={popularMovie} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

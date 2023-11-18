@@ -13,6 +13,7 @@ const TrailerBackround = () => {
         className="youtube-player"
         src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1&showinfo=0&controls=0&modestbranding=0&rel=0&loop=1`}
         title="YouTube video player"
+        loop
       ></iframe>
     </div>
   );

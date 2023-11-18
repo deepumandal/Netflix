@@ -1,8 +1,11 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-const MovieLists = ({ title, movies }) => {
-  console.log("movies", "movies");
+const MovieLists = ({ title, movies, isgptlist }) => {
+  console.log(
+    "movieList",
+    isgptlist ? "flex w-fit flex-wrap" : "flex overflow-x-scroll w-full m-auto"
+  );
   return (
     <div className="">
       <h1
@@ -11,7 +14,13 @@ const MovieLists = ({ title, movies }) => {
       >
         {title}
       </h1>
-      <div className="flex overflow-x-scroll w-screen m-auto  ">
+      <div
+        className={
+          isgptlist
+            ? "flex w-fit flex-wrap"
+            : "flex overflow-x-scroll w-full m-auto"
+        }
+      >
         {movies?.map((item) => {
           return <MovieCard key={item.id} item={item} />;
         })}
