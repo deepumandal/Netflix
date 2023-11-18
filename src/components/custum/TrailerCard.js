@@ -7,8 +7,8 @@ const TrailerCard = () => {
   const { original_title, overview } = currentTrailer?.movieDetail;
 
   return (
-    <div className=" absolute aspect-video flex items-center text-white  w-screen bg-gradient-to-r from-[#000000a2]">
-      <div className="  w-1/4 ml-8">
+    <div className=" absolute top-0 h-full flex items-center text-white  w-screen bg-gradient-to-r from-[#000000a2]">
+      <div className=" mt-10 w-1/4 ml-8">
         <h1 className="text-2xl  font-bold">{original_title}</h1>
         <p className="hidden md:inline-block py-6 text-sm ">{overview}</p>
         <div className="my-4 md:m-0">

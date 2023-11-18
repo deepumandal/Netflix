@@ -19,11 +19,24 @@ export const logoutUserApi = async () => {
   return await signOut(auth);
 };
 
+export const NowPlayingMovies = (signal) => {
+  return axios.get("https://api.themoviedb.org/3/movie/now_playing", {
+    ...TMDB_OPTIONS,
+    signal,
+  });
+};
+
 export const TrendingMovies = (signal) => {
-  return axios.get(
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-    { ...TMDB_OPTIONS, signal }
-  );
+  return axios.get("https://api.themoviedb.org/3/trending/movie/day?language=en-hi", {
+    ...TMDB_OPTIONS,
+    signal,
+  });
+};
+export const PopularMovies = (signal) => {
+  return axios.get("https://api.themoviedb.org/3/movie/popular", {
+    ...TMDB_OPTIONS,
+    signal,
+  });
 };
 
 export const getVideoApi = (movie_id) => {

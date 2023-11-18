@@ -17,12 +17,12 @@ const Navbar = () => {
   return (
     <div className="z-10 fixed w-full flex justify-between items-center px-8 py-3 bg-gradient-to-b from-[#000000]  bg-opacity-10">
       <div>
-        <img src={LOGO} className="w-44" />
+        <img src={LOGO} className="w-32" />
       </div>
       <div>
         <button
           onClick={handleSignout}
-          className="bg-red-700 px-4 py-2 text-white font-semibold tracking-wide rounded-lg"
+          className="bg-red-700 px-3 py-2 text-white font-bold tracking-wide rounded-lg"
         >
           Sign out{" "}
         </button>

@@ -7,7 +7,7 @@
   padding: 0px;
   width: 100vw;
 }
-&::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 0;
   height: 0;
   background-color: transparent;
@@ -15,4 +15,23 @@
 
 &::-moz-scrollbar {
   visibility: hidden;
+}
+/*.ytp-chrome-top,
+.ytp-show-cards-title {
+  display: none !important;
+} */
+.youtube-container {
+  z-index: 0;
+  height: 700px;
+  position: relative;
+  background-color: red;
+}
+
+.youtube-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
 }
