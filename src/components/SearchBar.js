@@ -28,6 +28,8 @@ const SearchBar = () => {
       userGptQuerry.current.value +
       ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
+      console.log("REACT_APP_GPT_API_KEY",process.env.REACT_APP_GPT_API_KEY)
+
     const chatCompletion = await AskGpt.chat.completions.create({
       messages: [{ role: "user", content: querry }],
       model: "gpt-3.5-turbo",

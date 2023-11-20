@@ -1,3 +1,4 @@
+import React from 'react'
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Login from "../views/Authentication";
 import LandingPage from "../views/LandingPage";
@@ -8,6 +9,7 @@ function AppLayout() {
   return (
     <>
       <Navbar />
+      
       <Outlet />
     </>
   );
@@ -17,16 +19,15 @@ export const AppRoute = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <PrivateRoute>
+      <PrivateRoute>
         <AppLayout />
-      // </PrivateRoute>
+      </PrivateRoute>
     ),
     children: [
       {
         path: "/",
         element: <LandingPage />,
       },
-      ,
     ],
   },
   {

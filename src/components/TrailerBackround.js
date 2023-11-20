@@ -1,21 +1,35 @@
 import React, { useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
+import YouTube from "react-youtube";
 
 const TrailerBackround = () => {
   const currentTrailer = useSelector((store) => store.trending?.currentTrailer);
+
+  const onReady = (event) => {
+    // Remove the controls
+    console.log("event", event?.target);
+    // event.target.player?.controls = false;
+
+    // Hide the title
+    // const titleElement = event.target.player.querySelector(".ytp-title-link");
+    // titleElement.style.display = "none";
+
+    // Hide the YouTube logo
+    // const logoElement = event.target.player.querySelector(".ytp-logo");
+    // logoElement.style.display = "none";
+  };
 
   if (!currentTrailer?.mediaDetail) return;
   const key = currentTrailer?.mediaDetail.key;
   return (
     <div
-      className="overflow-hidden aspect-video w-screen items-center bg-gradient-to-b from-[#000000]
+      className="overflow-hidden aspect-video w-full items-center bg-gradient-to-b from-[#000000]
     z-0
     bg-red-500
     h-[200px]
-    md:h-[600px]   
+    md:h-[600px]
     lg:h-[700px]
-     relative    
+     relative
     "
     >
       <iframe
@@ -32,6 +46,16 @@ const TrailerBackround = () => {
         loop
       ></iframe>
     </div>
+    // <YouTube
+    //   videoId={key}
+    //   onReady={onReady}
+    //   playerVars={{
+    //     controls: 0,
+    //     showinfo: 0,
+    //     modestbranding: 0,
+
+    //   }}
+    // />
   );
 };
 
