@@ -7,7 +7,7 @@ export const TMDB_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: process.env.REACT_APP_TMDB_AUTHORIZATION,
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_AUTHORIZATION}`,
   },
 };
 export const IMG_CDN_URL =
