@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useRef } from "react";
-import AskGpt from "../../utils/gptConfig";
-import { TMDB_OPTIONS } from "../../utils/constants";
+import AskGpt from "../utils/gptConfig";
+import { TMDB_OPTIONS } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setMoviesSearchResults, setSearch } from "../../reduxStore/GptSlice";
+import { setMoviesSearchResults, setSearch } from "../reduxStore/GptSlice";
 
 const SearchBar = () => {
   const userGptQuerry = useRef(); // current.value
@@ -60,7 +60,7 @@ const SearchBar = () => {
       <input
         ref={userGptQuerry}
         type="text"
-        placeholder="What do you wish to watch..."
+        placeholder="What do you want to watch..."
         className="px-4 py-2 w-[80%] outline-none rounded-lg"
       />
       <button

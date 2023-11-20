@@ -2,7 +2,7 @@ import { Outlet, createBrowserRouter } from "react-router-dom";
 import Login from "../views/Authentication";
 import LandingPage from "../views/LandingPage";
 import PrivateRoute from "../HOC/PrivateRoute";
-import Navbar from "../components/custum/Navbar";
+import Navbar from "../components/Navbar";
 
 function AppLayout() {
   return (

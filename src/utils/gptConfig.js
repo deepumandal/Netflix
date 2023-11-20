@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 export default AskGpt = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.REACT_APP_GPT_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 

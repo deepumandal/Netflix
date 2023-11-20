@@ -10,7 +10,8 @@ const MovieLists = ({ title, movies, isgptlist }) => {
     <div className="">
       <h1
         className="text-white 
-         font-bold mt-5 text-2xl"
+        text-sm
+         font-bold mt-5 md:text-2xl"
       >
         {title}
       </h1>

@@ -1,9 +1,8 @@
 import React from "react";
 import { backgroundImage } from "../utils/constants";
-import SearchBar from "../components/custum/SearchBar";
+import SearchBar from "../components/SearchBar";
 import { useSelector } from "react-redux";
-import MovieLists from "../components/custum/movieLists";
-import GptMovieSuggestions from "../components/custum/GptMovieSuggestions";
+import GptMovieSuggestions from "../components/GptMovieSuggestions";
 
 const GptPage = () => {
   const { searchResults } = useSelector((store) => store.gpt);
@@ -22,16 +21,6 @@ const GptPage = () => {
       </div>
 
       <div className="z-2 relative w-full m-auto ">
-        {/* {searchResults.length && (
-          <div className="w-full bg-gradient-to-b from-transparent to-black overflow-x-hidden">
-            <MovieLists
-              isgptlist={true}
-              title={"Your Search Results"}
-              movies={searchResults}
-            />
-          </div>
-        )} */}
-
         {searchResults.length && (
           <div className="w-full bg-gradient-to-b from-transparent to-black overflow-x-hidden">
             {searchResults?.map((suggestedMovie) => {

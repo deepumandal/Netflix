@@ -7,8 +7,8 @@ export const TMDB_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MmQxNzI1MmI2M2MzMzhiMGI4NTEwNjY5MjZmNjk4MSIsInN1YiI6IjYyNWFiNjE2NzRkNmMwMzljMjc2ZWQ1ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6aAk3LA7z7c7CMgU5QmlPEKB279kzHh55eQaeVd3JVo",
+    Authorization: process.env.REACT_APP_TMDB_AUTHORIZATION,
   },
 };
-export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w250https://image.tmdb.org/t/p/w500";
+export const IMG_CDN_URL =
+  "https://image.tmdb.org/t/p/w250https://image.tmdb.org/t/p/w500";
