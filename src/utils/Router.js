@@ -1,27 +1,26 @@
-import React from 'react'
-import { Outlet, createBrowserRouter } from "react-router-dom";
-import Login from "../views/Authentication";
-import LandingPage from "../views/LandingPage";
-import PrivateRoute from "../HOC/PrivateRoute";
-import Navbar from "../components/Navbar";
+import React from "react";
+import { Outlet, createHashRouter } from "react-router-dom";
+const Login = React.lazy(() => import("../views/Authentication"));
+const LandingPage = React.lazy(() => import("../views/LandingPage"));
+const Navbar = React.lazy(() => import("../components/Navbar"));
+const PrivateRoute = React.lazy(() => import("../HOC/PrivateRoute"));
 
 function AppLayout() {
   return (
     <>
       <Navbar />
-      
       <Outlet />
     </>
   );
 }
 
-export const AppRoute = createBrowserRouter([
+export const AppRoute = createHashRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
-        <AppLayout />
-      </PrivateRoute>
+      // <PrivateRoute>
+      <AppLayout />
+      // </PrivateRoute>
     ),
     children: [
       {

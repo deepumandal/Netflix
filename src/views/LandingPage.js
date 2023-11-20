@@ -67,21 +67,21 @@ const LandingPage = () => {
     };
   }, []);
   return (
-    <div className="">
+    <div className="bg-black">
       {isGptPage ? (
         <GptPage />
       ) : (
         <>
           <div className="relative w-screen aspect-video">
             <TrailerBackround />
-            {/* <TrailerCard /> */}
+            <TrailerCard />
           </div>
           {/* movie lists */}
-          {/* <div className="bg-gradient-to-b from-[#ffffff00] pl-2 md:pl-4 to-black -mt-16 sm:-mt-28 md:-mt-40 relative z-5">
+          <div className="bg-gradient-to-b from-[#ffffff00] pl-2 md:pl-4 to-black -mt-16 sm:-mt-28 md:-mt-40 relative z-5">
             <MovieLists title={"Now Playing"} movies={nowPlayingMovie} />
             <MovieLists title={"Trending"} movies={trendingMovie} />
             <MovieLists title={"Popular"} movies={popularMovie} />
-          </div> */}
+          </div>
         </>
       )}
     </div>

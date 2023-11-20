@@ -5,34 +5,37 @@ import YouTube from "react-youtube";
 const TrailerBackround = () => {
   const currentTrailer = useSelector((store) => store.trending?.currentTrailer);
 
-  const onReady = (event) => {
-    // Remove the controls
-    console.log("event", event?.target);
-    // event.target.player?.controls = false;
-
-    // Hide the title
-    // const titleElement = event.target.player.querySelector(".ytp-title-link");
-    // titleElement.style.display = "none";
-
-    // Hide the YouTube logo
-    // const logoElement = event.target.player.querySelector(".ytp-logo");
-    // logoElement.style.display = "none";
+  const handleOnload = (event) => {
+    // const childDocument = event?.target?.contentWindow?.top?.document;
+    // const childHtml = childDocument?.childNodes[1];
+    // const childHead = childHtml?.childNodes[0];
+    // const jsInjections = document.createElement("script");
+    // jsInjections.setAttribute("defer", "");
+    // jsInjections.innerHTML = `
+    // const yt_title = document.getElementsByClassName("ytp-show-cards-title")
+    // // yt_title.style.display = "none";
+    // console.log("console from childHtml: " + yt_title.length)
+    // `;
+    // childHead.appendChild(jsInjections);
+    // console.log("childDocument", event?.target?.contentWindow.postMessage());
   };
 
   if (!currentTrailer?.mediaDetail) return;
   const key = currentTrailer?.mediaDetail.key;
   return (
     <div
-      className="overflow-hidden aspect-video w-full items-center bg-gradient-to-b from-[#000000]
+      className="overflow-hidden aspect-video w-full items-center 
+    bg-gradient-to-b from-[#000000]   
     z-0
-    bg-red-500
+    bg-red
     h-[200px]
-    md:h-[600px]
+    md:h-[480px]
     lg:h-[700px]
      relative
     "
     >
       <iframe
+        id="iframe_container"
         className="
         absolute
         top-[50%]
@@ -41,21 +44,11 @@ const TrailerBackround = () => {
         aspect-video
         -translate-x-1/2 -translate-y-1/2
         "
-        src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1&showinfo=0&controls=0&modestbranding=0&rel=0&loop=1`}
+        src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1&showinfo=0&controls=0&modestbranding=1&rel=0&loop=1`}
         title="YouTube video player"
-        loop
+        onLoad={handleOnload}
       ></iframe>
     </div>
-    // <YouTube
-    //   videoId={key}
-    //   onReady={onReady}
-    //   playerVars={{
-    //     controls: 0,
-    //     showinfo: 0,
-    //     modestbranding: 0,
-
-    //   }}
-    // />
   );
 };
 
