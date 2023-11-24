@@ -1,9 +1,9 @@
 import React, { memo, useEffect, useRef } from "react";
 import AskGpt from "../utils/gptConfig";
-import { TMDB_OPTIONS } from "../utils/constants";
+import { NETFLIX_SERVER_BASE_URL, TMDB_OPTIONS } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setMoviesSearchResults, setSearch } from "../reduxStore/GptSlice";
-
+import axios from "axios";
 const SearchBar = () => {
   const userGptQuerry = useRef(); // current.value
   const dispatch = useDispatch();
@@ -23,28 +23,25 @@ const SearchBar = () => {
   const handleClickOnSearchbtn = async (event) => {
     event.preventDefault();
     dispatch(setSearch());
-    const querry =
-      "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      userGptQuerry.current.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
-    const chatCompletion = await AskGpt.chat.completions.create({
-      messages: [{ role: "user", content: querry }],
-      model: "gpt-3.5-turbo",
-    });
+    axios
+      .post(NETFLIX_SERVER_BASE_URL + "/openai/connections", {
+        question: userGptQuerry.current.value,
+      })
+      .then((res) => {
+        const data = res.data;
+        axios
+          .post(NETFLIX_SERVER_BASE_URL + "/search/movie", data)
+          .then((res) => {
+            const { data } = res;
+            console.log(data)
+            dispatch(setMoviesSearchResults(data));
+          });
+      });
 
-    if (!chatCompletion.choices) {
-      // TODO: Write Error Handling
-    }
+    // console.log("tmdbResults", tmdbResults);
 
-    console.log(chatCompletion.choices?.[0]?.message?.content);
-    const gptMovies = chatCompletion.choices?.[0]?.message?.content.split(",");
-    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-
-    const tmdbResults = await Promise.all(promiseArray);
-    console.log("tmdbResults", tmdbResults);
-
-    dispatch(setMoviesSearchResults(tmdbResults));
+    // dispatch(setMoviesSearchResults(tmdbResults));
   };
 
   useEffect(() => {
