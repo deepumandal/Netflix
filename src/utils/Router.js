@@ -18,9 +18,9 @@ export const AppRoute = createHashRouter([
   {
     path: "/",
     element: (
-      // <PrivateRoute>
-      <AppLayout />
-      // </PrivateRoute>
+      <PrivateRoute>
+        <AppLayout />
+      </PrivateRoute>
     ),
     children: [
       {
