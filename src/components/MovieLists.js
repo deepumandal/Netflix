@@ -2,10 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieLists = ({ title, movies, isgptlist }) => {
-  console.log(
-    "movieList",
-    isgptlist ? "flex w-fit flex-wrap" : "flex overflow-x-scroll w-full m-auto"
-  );
   return (
     <div className="">
       <h1

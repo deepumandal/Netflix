@@ -1,5 +1,4 @@
 import React, { memo, useEffect, useRef } from "react";
-import AskGpt from "../utils/gptConfig";
 import { NETFLIX_SERVER_BASE_URL, TMDB_OPTIONS } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setMoviesSearchResults, setSearch } from "../reduxStore/GptSlice";
@@ -38,10 +37,6 @@ const SearchBar = () => {
             dispatch(setMoviesSearchResults(data));
           });
       });
-
-    // console.log("tmdbResults", tmdbResults);
-
-    // dispatch(setMoviesSearchResults(tmdbResults));
   };
 
   useEffect(() => {

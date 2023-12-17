@@ -1,11 +1,4 @@
-import OpenAI from "openai";
 
-
-const AskGpt = new OpenAI({
-  apiKey: process.env.REACT_APP_GPT_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
-export default AskGpt;
 
 // example
 // async function main() {
