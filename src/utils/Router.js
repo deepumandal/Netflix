@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Outlet, createHashRouter } from "react-router-dom";
 const Login = React.lazy(() => import("../views/Authentication"));
 const LandingPage = React.lazy(() => import("../views/LandingPage"));
@@ -25,12 +25,22 @@ export const AppRoute = createHashRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage />,
+        element: (
+          <Suspense>
+            {" "}
+            <LandingPage />
+          </Suspense>
+        ),
       },
     ],
   },
   {
     path: "/authentication",
-    element: <Login />,
+    element: (
+      <Suspense>
+        {" "}
+        <Login />
+      </Suspense>
+    ),
   },
 ]);
